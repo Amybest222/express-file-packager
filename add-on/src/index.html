@@ -358,14 +358,23 @@
             const needsPdf = formats.some(format => format.type === 'pdf');
             if (!needsPdf) return true;
 
-            showStatus('Checking PDF access...', 'info');
-            const canExportPdf = await addOnUISdk.app.startPremiumUpgradeIfFreeUser();
-            if (!canExportPdf) {
-                showStatus('PDF export requires Adobe Express Premium. Upgrade to continue.', 'warning');
-                return false;
+            try {
+                showStatus('Checking PDF access...', 'info');
+                const isPremium = await addOnUISdk.app.startPremiumUpgradeIfFreeUser();
+                if (!isPremium) {
+                    showStatus('PDF export requires Adobe Express Premium. Please upgrade to continue.', 'warning');
+                    exportBtn.disabled = false;
+                    return false;
+                }
+                return true;
+            } catch (err) {
+                if (err.message && err.message.includes('USER_NOT_ENTITLED')) {
+                    showStatus('PDF export requires Adobe Express Premium. Please upgrade to continue.', 'warning');
+                    exportBtn.disabled = false;
+                    return false;
+                }
+                throw err;
             }
-
-            return true;
         }
 
         async function createPackage() {
@@ -436,10 +445,13 @@
                 const a = document.createElement('a');
                 a.href = url;
                 a.download = `${safeTitle}_package.zip`;
+                a.style.display = 'none';
                 document.body.appendChild(a);
+                await new Promise(resolve => setTimeout(resolve, 100));
                 a.click();
+                await new Promise(resolve => setTimeout(resolve, 500));
                 document.body.removeChild(a);
-                setTimeout(() => URL.revokeObjectURL(url), 1000);
+                URL.revokeObjectURL(url);
                 updateProgress(100);
                 showStatus('✓ Package downloaded!', 'success');
                 setTimeout(() => {
