@@ -89,6 +89,24 @@ If you publish this on GitHub, use your repository URL as the Help URL, for exam
 
 `https://github.com/amybest222/express-file-packager`
 
+## Privacy
+
+Express File Packager does not collect, store, or transmit personal data.
+
+All processing happens locally within Adobe Express while creating export packages.
+
+The add-on only generates user-requested output files (for example: PNG, JPG, PDF, and optional fonts.txt) and downloads them to your device.
+
+Full privacy notice:
+
+https://github.com/amybest222/express-file-packager/blob/main/add-on/PRIVACY.md
+
+## EULA
+
+For terms of use, see Adobe Terms of Use:
+
+https://www.adobe.com/legal/terms.html
+
 ## License
 
 Add your preferred license here (for example: MIT).
