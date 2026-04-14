@@ -1,0 +1,4 @@
+.DS_Store
+add-on/node_modules/
+add-on/dist/
+add-on/dist.zip

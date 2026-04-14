@@ -1,7 +1,7 @@
 {
     "testId": "playground-add-on",
     "name": "Playground AddOn",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "manifestVersion": 2,
     "requirements": {
         "apps": [
