@@ -353,6 +353,21 @@
         function getSelectedFonts() {
             return Array.from(fontListEl.querySelectorAll('input[type="checkbox"]:checked')).map(el => el.value);
         }
+
+        async function ensurePdfEntitlement(formats) {
+            const needsPdf = formats.some(format => format.type === 'pdf');
+            if (!needsPdf) return true;
+
+            showStatus('Checking PDF access...', 'info');
+            const canExportPdf = await addOnUISdk.app.startPremiumUpgradeIfFreeUser();
+            if (!canExportPdf) {
+                showStatus('PDF export requires Adobe Express Premium. Upgrade to continue.', 'warning');
+                return false;
+            }
+
+            return true;
+        }
+
         async function createPackage() {
             try {
                 exportBtn.disabled = true;
@@ -372,6 +387,14 @@
                     exportBtn.disabled = false;
                     return;
                 }
+
+                const hasPdfEntitlement = await ensurePdfEntitlement(formats);
+                if (!hasPdfEntitlement) {
+                    updateProgress(0);
+                    exportBtn.disabled = false;
+                    return;
+                }
+
                 updateProgress(10);
                 const docTitle = await addOnUISdk.app.document.title();
                 const safeTitle = docTitle.replace(/[^a-z0-9]/gi, '_').toLowerCase();

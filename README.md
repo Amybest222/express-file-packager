@@ -42,6 +42,7 @@ Express File Packager bundles everything you need from your Adobe Express docume
 
 Express File Packager does not collect, store, or transmit any personal data. All processing happens within your Adobe Express session. No user data ever leaves your device.
 
+Privacy notice URL: https://github.com/amybest222/express-file-packager#privacy
 ---
 
 ## EULA
@@ -52,7 +53,9 @@ Use of this add-on is subject to the [Adobe General Terms of Use](https://www.ad
 
 ## Support
 
-Having trouble or have a suggestion? Please [open an issue](../../issues) on this repository or reach out via the Adobe Express Marketplace listing.
+Having trouble or have a suggestion? Please [open an issue](https://github.com/amybest222/express-file-packager/issues) on this repository or reach out via the Adobe Express Marketplace listing.
+
+Help URL: https://github.com/amybest222/express-file-packager
 
 ---
 
